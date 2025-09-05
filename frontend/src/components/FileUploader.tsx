@@ -12,7 +12,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Loader2 } from "lucide-react";
+import { Download, Loader2 } from "lucide-react";
+import toast from "react-hot-toast";
 
 export default function FileUploader() {
   const [file, setFile] = useState<File | null>(null);
@@ -20,8 +21,30 @@ export default function FileUploader() {
   const [loading, setLoading] = useState<boolean>(false);
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
 
+  const allowedExtensions: Record<string, string[]> = {
+    "pdf-to-docx": ["pdf"], // PDF → DOCX
+    "docx-to-pdf": ["docx"], // DOCX → PDF
+    "pdf-to-pptx": ["pdf"], // PDF → PPTX
+    "md-to-pdf": ["md"], // MD → PDF
+    "docx-to-txt": ["docx"], // DOCX → TXT
+    "txt-to-docx": ["txt"], // TXT → DOCX
+  };
+
   const handleUpload = async () => {
     if (!file) return;
+
+    const requiredExts = allowedExtensions[format];
+    const fileExt = file.name.split(".").pop()?.toLowerCase();
+
+    if (!requiredExts.includes(fileExt || "")) {
+      toast.error(
+        `Invalid file. Expected: ${requiredExts
+          .map((ext) => `.${ext}`)
+          .join(", ")}`
+      );
+      return;
+    }
+
     setLoading(true);
 
     const formData = new FormData();
@@ -29,14 +52,21 @@ export default function FileUploader() {
     formData.append("output_format", format);
 
     try {
-      const res = await axios.post("http://localhost:8000/convert", formData, {
-        responseType: "blob",
-      });
+      const res = await axios.post(
+        `${import.meta.env.VITE_HOST_URL}/convert`,
+        formData,
+        {
+          responseType: "blob",
+        }
+      );
+
       const url = window.URL.createObjectURL(new Blob([res.data]));
       setDownloadUrl(url);
+
+      toast.success(`File converted successfully to ${format.toUpperCase()}`);
     } catch (err) {
       console.error(err);
-      alert("Conversion failed");
+      toast.error("Conversion failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -50,7 +80,10 @@ export default function FileUploader() {
       <CardContent className="flex flex-col gap-4">
         <Input
           type="file"
-          onChange={(e) => setFile(e.target.files?.[0] || null)}
+          onChange={(e) => {
+            setFile(e.target.files?.[0] || null);
+            setDownloadUrl(null);
+          }}
         />
 
         <Select value={format} onValueChange={setFormat}>
@@ -58,10 +91,12 @@ export default function FileUploader() {
             <SelectValue placeholder="Choose output format" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="docx">PDF → DOCX</SelectItem>
-            <SelectItem value="pdf">DOCX → PDF</SelectItem>
-            <SelectItem value="pptx">PDF → PPTX</SelectItem>
-            <SelectItem value="txt">DOCX → TXT</SelectItem>
+            <SelectItem value="pdf-to-docx">PDF → DOCX</SelectItem>
+            <SelectItem value="docx-to-pdf">DOCX → PDF</SelectItem>
+            <SelectItem value="pdf-to-pptx">PDF → PPTX</SelectItem>
+            <SelectItem value="md-to-pdf">MD → PDF</SelectItem>
+            <SelectItem value="docx-to-txt">DOCX → TXT</SelectItem>
+            <SelectItem value="txt-to-docx">TXT → DOCX</SelectItem>
           </SelectContent>
         </Select>
 
@@ -74,13 +109,16 @@ export default function FileUploader() {
         </Button>
 
         {downloadUrl && (
-          <a
-            href={downloadUrl}
-            download={`converted.${format}`}
-            className="text-blue-600 underline text-center"
+          <Button
+            asChild
+            className="w-full flex items-center justify-center gap-2"
+            variant="outline"
           >
-            Download File
-          </a>
+            <a href={downloadUrl} download={`converted.${format}`}>
+              <Download className="w-4 h-4" />
+              Download File
+            </a>
+          </Button>
         )}
       </CardContent>
     </Card>

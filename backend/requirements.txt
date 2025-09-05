@@ -8,3 +8,4 @@ python-docx
 reportlab 
 docx2pdf 
 markdown
+weasyprint

@@ -4,7 +4,7 @@ from pdf2docx import Converter
 def pdf_to_pptx(input_path: str, output_path: str) -> str:
     prs = Presentation()
     cv = Converter(input_path)
-    tmp_docx = "temp_from_pdf.docx"
+    tmp_docx = "/temp/src/temp_from_pdf.docx"
     cv.convert(tmp_docx, start=0, end=None)
     cv.close()
 
