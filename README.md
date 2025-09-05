@@ -8,3 +8,4 @@ to deactivate the environemnt:
 
 To run the backend server:
 `uvicorn app.main:app --reload`
+`./venv/bin/uvicorn app.main:app --reload`

@@ -2,3 +2,9 @@ fastapi
 uvicorn
 python-multipart
 pypandoc
+pdf2docx 
+python-pptx 
+python-docx 
+reportlab 
+docx2pdf 
+markdown
