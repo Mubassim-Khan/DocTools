@@ -73,54 +73,60 @@ export default function FileUploader() {
   };
 
   return (
-    <Card className="w-full max-w-md mx-auto shadow-xl">
-      <CardHeader>
-        <CardTitle className="text-lg font-bold">Document Converter</CardTitle>
-      </CardHeader>
-      <CardContent className="flex flex-col gap-4">
-        <Input
-          type="file"
-          onChange={(e) => {
-            setFile(e.target.files?.[0] || null);
-            setDownloadUrl(null);
-          }}
-        />
+      <>
+      <Card className="w-full max-w-md mx-auto shadow-xl">
+        <CardHeader>
+          <CardTitle className="text-lg font-bold">
+            Document Converter
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="flex flex-col gap-4">
+          <Input
+            type="file"
+            onChange={(e) => {
+              setFile(e.target.files?.[0] || null);
+              setDownloadUrl(null);
+            }}
+          />
 
-        <Select value={format} onValueChange={setFormat}>
-          <SelectTrigger>
-            <SelectValue placeholder="Choose output format" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="pdf-to-docx">PDF → DOCX</SelectItem>
-            <SelectItem value="docx-to-pdf">DOCX → PDF</SelectItem>
-            <SelectItem value="pdf-to-pptx">PDF → PPTX</SelectItem>
-            <SelectItem value="md-to-pdf">MD → PDF</SelectItem>
-            <SelectItem value="docx-to-txt">DOCX → TXT</SelectItem>
-            <SelectItem value="txt-to-docx">TXT → DOCX</SelectItem>
-          </SelectContent>
-        </Select>
+          <Select value={format} onValueChange={setFormat}>
+            <SelectTrigger>
+              <span className="font-semibold text-sm">
+                Choose output format
+              </span>
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="pdf-to-docx">PDF → DOCX</SelectItem>
+              <SelectItem value="docx-to-pdf">DOCX → PDF</SelectItem>
+              <SelectItem value="pdf-to-pptx">PDF → PPTX</SelectItem>
+              <SelectItem value="md-to-pdf">MD → PDF</SelectItem>
+              <SelectItem value="docx-to-txt">DOCX → TXT</SelectItem>
+              <SelectItem value="txt-to-docx">TXT → DOCX</SelectItem>
+            </SelectContent>
+          </Select>
 
-        <Button onClick={handleUpload} disabled={loading || !file}>
-          {loading ? (
-            <Loader2 className="animate-spin w-4 h-4 mr-2" />
-          ) : (
-            "Convert"
-          )}
-        </Button>
-
-        {downloadUrl && (
-          <Button
-            asChild
-            className="w-full flex items-center justify-center gap-2"
-            variant="outline"
-          >
-            <a href={downloadUrl} download={`converted.${format}`}>
-              <Download className="w-4 h-4" />
-              Download File
-            </a>
+          <Button onClick={handleUpload} disabled={loading || !file}>
+            {loading ? (
+              <Loader2 className="animate-spin w-4 h-4 mr-2" />
+            ) : (
+              "Convert"
+            )}
           </Button>
-        )}
-      </CardContent>
-    </Card>
+
+          {downloadUrl && (
+            <Button
+              asChild
+              className="w-full flex items-center justify-center gap-2"
+              variant="outline"
+            >
+              <a href={downloadUrl} download={`converted.${format}`}>
+                <Download className="w-4 h-4" />
+                Download File
+              </a>
+            </Button>
+          )}
+        </CardContent>
+      </Card>
+     </>
   );
 }

@@ -12,6 +12,7 @@ export default function Navbar() {
         <nav className="hidden md:flex gap-6 text-lg font-medium">
           <a href="#features" className="hover:text-blue-600">Features</a>
           <a href="#how-it-works" className="hover:text-blue-600">Getting Started</a>
+          <a href="#qr" className="hover:text-blue-600">QR Generator</a>
           <a href="#contact" className="hover:text-blue-600">Contact</a>
         </nav>
         <Button asChild>
