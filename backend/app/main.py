@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routes import convert
+from app.routes import analyze
 
 app = FastAPI(title="DocTools API")
 
@@ -19,6 +20,7 @@ app.add_middleware(
 
 # register routes
 app.include_router(convert.router)
+app.include_router(analyze.router)
 
 @app.get("/")
 def root():

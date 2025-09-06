@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Hero from "./components/Hero";
 import HowItWorks from "./components/HowItWorkts";
 import Navbar from "./components/Navbar";
+import OCR from "./components/OCR";
 import QRSection from "./components/QRSection";
 import Showcase from "./components/Showcase";
 import { ToasterProvider } from "./components/ToastProvider";
@@ -21,6 +22,7 @@ function App() {
         <FileUploader />
         <QRSection />
       </section>
+      <OCR />
       <Showcase />
       <Footer />
     </>

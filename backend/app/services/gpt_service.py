@@ -1,14 +1,17 @@
 import os
+from dotenv import load_dotenv
 from azure.ai.inference import ChatCompletionsClient
 from azure.ai.inference.models import SystemMessage, UserMessage
 from azure.core.credentials import AzureKeyCredential
+
+load_dotenv()
 
 # GitHub Models endpoint + model
 ENDPOINT = "https://models.github.ai/inference"
 MODEL = "openai/gpt-4.1"
 
 # Load token securely from env
-TOKEN = os.environ["GITHUB_TOKEN_GPT_4_1"]
+TOKEN = os.getenv("GITHUB_TOKEN_GPT_4_1")
 
 # Init client once
 client = ChatCompletionsClient(

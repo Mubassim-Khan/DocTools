@@ -26,7 +26,7 @@ export default function Showcase() {
   const [emblaRef] = useEmblaCarousel({ loop: true }, [autoplay]);
 
   return (
-    <section className="py-10 bg-gradient-to-b from-purple-100 to-gray-50">
+    <section className="py-10 bg-gradient-to-b from-blue-50 to-gray-50">
       <h2 className="text-3xl font-bold text-center mb-8">See It in Action</h2>
 
       <div className="max-w-3xl mx-auto">

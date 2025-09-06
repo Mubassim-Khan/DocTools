@@ -10,3 +10,5 @@ docx2pdf
 markdown
 weasyprint
 azure-ai-inference
+PyPDF2
+load_dotenv

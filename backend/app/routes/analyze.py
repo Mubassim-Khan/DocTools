@@ -1,13 +1,14 @@
-from fastapi import FastAPI, UploadFile, Form
-from services.ocr_service import extract_text_from_image, extract_text_from_pdf
-from services.gpt_service import analyze_text_with_gpt41
+from fastapi import APIRouter, UploadFile, Form
+from app.services.ocr_service import extract_text_from_image, extract_text_from_pdf
+from app.services.gpt_service import analyze_text_with_gpt41
 import os
 
-app = FastAPI()
+router = APIRouter(prefix="/analyze", tags=["Analyze"])
 
-@app.post("/analyze")
+@router.post("")
+
 async def analyze_doc(file: UploadFile, query: str = Form("Summarize this document.")):
-    file_path = os.path.join("uploads", file.filename)
+    file_path = os.path.join("temp", file.filename)
     with open(file_path, "wb") as f:
         f.write(await file.read())
 
