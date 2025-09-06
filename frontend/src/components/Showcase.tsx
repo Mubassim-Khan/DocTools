@@ -7,34 +7,47 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
 
 const images = [
-  "/assets/conversion1.png",
-  "/assets/conversion2.png",
-  "/assets/conversion3.png",
+  "../src/assets/conversion1.jpg",
+  "../src/assets/conversion2.png",
+  "../src/assets/conversion3.jpg",
+  "../src/assets/conversion4.jpg",
 ];
 
 export default function Showcase() {
+  const autoplay = Autoplay({
+    delay: 3000,
+    stopOnInteraction: true,
+    stopOnMouseEnter: true,
+  });
+  const [emblaRef] = useEmblaCarousel({ loop: true }, [autoplay]);
+
   return (
-    <section className="py-3 bg-gradient-to-b from-purple-100 to-gray-50">
+    <section className="py-10 bg-gradient-to-b from-purple-100 to-gray-50">
       <h2 className="text-3xl font-bold text-center mb-8">See It in Action</h2>
-      <Carousel className="max-w-xl mx-auto">
-        <CarouselContent>
-          {images.map((src, i) => (
-            <CarouselItem key={i}>
-              <img
-                src={src}
-                alt={`Showcase ${i + 1}`}
-                width={600}
-                height={400}
-                className="rounded-xl shadow-md"
-              />
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
-      </Carousel>
+
+      <div className="max-w-3xl mx-auto">
+        <Carousel ref={emblaRef} className="w-full">
+          <CarouselContent>
+            {images.map((src, i) => (
+              <CarouselItem key={i} className="flex justify-center">
+                <div className="h-[400px] w-[600px] bg-white flex items-center justify-center rounded-xl shadow-md overflow-hidden">
+                  <img
+                    src={src}
+                    alt={`Showcase ${i + 1}`}
+                    className="max-h-full max-w-full object-contain"
+                  />
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
+      </div>
     </section>
   );
 }
