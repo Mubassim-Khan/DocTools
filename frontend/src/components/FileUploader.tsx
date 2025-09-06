@@ -10,7 +10,6 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,
 } from "@/components/ui/select";
 import { Download, Loader2 } from "lucide-react";
 import toast from "react-hot-toast";
@@ -73,8 +72,11 @@ export default function FileUploader() {
   };
 
   return (
-      <>
-      <Card className="w-full max-w-md mx-auto shadow-xl">
+    <section className="py-5 container mx-auto px-4 scroll-mt-20">
+      <h2 className="text-3xl font-bold text-center mb-8">
+        Convert Your Files
+      </h2>
+      <Card className="py-10 w-full max-w-md mx-auto shadow-xl">
         <CardHeader>
           <CardTitle className="text-lg font-bold">
             Document Converter
@@ -127,6 +129,6 @@ export default function FileUploader() {
           )}
         </CardContent>
       </Card>
-     </>
+    </section>
   );
 }

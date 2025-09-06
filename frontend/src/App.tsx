@@ -17,10 +17,7 @@ function App() {
       <Hero />
       <Features />
       <HowItWorks />
-      <section id="upload" className="py-10 container mx-auto px-5 w-full bg-gradient-to-b from-blue-50 to-purple-100">
-        <h2 className="text-3xl font-bold text-center mb-8">
-          Convert Your Files
-        </h2>
+      <section id="upload" className="py-10 w-full bg-gradient-to-b from-blue-50 to-purple-100">
         <FileUploader />
         <QRSection />
       </section>

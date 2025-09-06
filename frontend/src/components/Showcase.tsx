@@ -16,7 +16,7 @@ const images = [
 
 export default function Showcase() {
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-3 bg-gradient-to-b from-purple-100 to-gray-50">
       <h2 className="text-3xl font-bold text-center mb-8">See It in Action</h2>
       <Carousel className="max-w-xl mx-auto">
         <CarouselContent>
