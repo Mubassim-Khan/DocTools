@@ -9,3 +9,4 @@ reportlab
 docx2pdf 
 markdown
 weasyprint
+azure-ai-inference
