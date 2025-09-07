@@ -27,7 +27,7 @@ export default function Showcase() {
 
   return (
     <section className="py-10 bg-gradient-to-b from-gray-100 to-white">
-      <h2 className="text-3xl font-bold text-center mb-8">See It in Action</h2>
+      <h2 className="text-3xl font-bold text-center mb-8">A Glimpse Into the Platform</h2>
 
       <div className="max-w-3xl mx-auto">
         <Carousel ref={emblaRef} className="w-full">

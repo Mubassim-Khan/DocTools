@@ -10,6 +10,7 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
+  SelectValue,
 } from "@/components/ui/select";
 import { Download, FileText, Loader2 } from "lucide-react";
 import toast from "react-hot-toast";
@@ -93,10 +94,9 @@ export default function FileUploader() {
           />
 
           <Select value={format} onValueChange={setFormat}>
+            <span className="font-semibold text-sm">Choose output format</span>
             <SelectTrigger>
-              <span className="font-semibold text-sm">
-                Choose output format
-              </span>
+              <SelectValue placeholder="Select a format" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="pdf-to-docx">PDF → DOCX</SelectItem>
