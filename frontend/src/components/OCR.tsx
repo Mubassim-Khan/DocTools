@@ -79,7 +79,7 @@ export default function OCR() {
   };
 
   return (
-    <section id="ocr" className="py-20 bg-gradient-to-t">
+    <section id="ocr" className="py-25">
       <h2 className="text-3xl font-bold text-center mb-8">
         PDF Text Summarizer
       </h2>

@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button";
+import { Sparkles } from "lucide-react";
 
 export default function Hero() {
   return (
-    <section className="py-20 text-center bg-gradient-to-b from-blue-50 to-white">
+    <section className="py-20 text-center bg-gradient-to-b from-blue-100 to-white">
       <h1 className="text-4xl md:text-6xl font-bold mb-6">
         Convert Documents Seamlessly
       </h1>
@@ -15,9 +16,24 @@ export default function Hero() {
         <span className="font-semibold">QR code generation</span>. <br />
         Simple. Fast. Reliable.
       </p>
-      <Button size="lg" asChild>
-        <a href="#upload">Start Converting</a>
-      </Button>
+      
+      <div className="flex justify-center gap-4">
+        <Button size="lg" asChild>
+          <a href="#upload">Start Converting</a>
+        </Button>
+
+        <Button
+          size="lg"
+          variant="secondary"
+          className="bg-purple-600 hover:bg-purple-700 text-white flex items-center gap-2"
+          asChild
+        >
+          <a href="#ocr">
+            <Sparkles className="w-5 h-5" />
+            Try OCR
+          </a>
+        </Button>
+      </div>
     </section>
   );
 }

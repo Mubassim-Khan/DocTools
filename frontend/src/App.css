@@ -4,14 +4,14 @@ html {
 
 @keyframes border-snake {
   0% {
-    background-position: 0 0;
+    background-position: 0% 0;
   }
   100% {
-    background-position: 400% 0;
+    background-position: 200% 0;
   }
 }
 
 .animate-border-snake {
-  background-size: 400% 400%;
+  background-size: 200% 200%;
   animation: border-snake 5s linear infinite;
 }

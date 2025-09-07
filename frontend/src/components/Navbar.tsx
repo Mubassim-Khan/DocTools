@@ -7,7 +7,6 @@ const navLinks = [
   { href: "#how-it-works", label: "Getting Started" },
   { href: "#qr", label: "QR Generator" },
   { href: "#ocr", label: "OCR" },
-  { href: "#contact", label: "Contact" },
 ];
 
 export default function Navbar() {
