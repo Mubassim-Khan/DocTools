@@ -2,6 +2,14 @@
 
 import { Button } from "@/components/ui/button";
 
+const navLinks = [
+  { href: "#features", label: "Features" },
+  { href: "#how-it-works", label: "Getting Started" },
+  { href: "#qr", label: "QR Generator" },
+  { href: "#ocr", label: "OCR" },
+  { href: "#contact", label: "Contact" },
+];
+
 export default function Navbar() {
   return (
     <header className="border-b bg-white/70 backdrop-blur-md sticky top-0 z-50">
@@ -14,18 +22,11 @@ export default function Navbar() {
           />
         </a>
         <nav className="hidden md:flex gap-6 text-lg font-medium">
-          <a href="#features" className="hover:text-blue-600">
-            Features
-          </a>
-          <a href="#how-it-works" className="hover:text-blue-600">
-            Getting Started
-          </a>
-          <a href="#qr" className="hover:text-blue-600">
-            QR Generator
-          </a>
-          <a href="#contact" className="hover:text-blue-600">
-            Contact
-          </a>
+          {navLinks.map((link) => (
+            <a key={link.href} href={link.href} className="hover:text-blue-600">
+              {link.label}
+            </a>
+          ))}
         </nav>
         <Button asChild>
           <a href="#upload">Try Now</a>

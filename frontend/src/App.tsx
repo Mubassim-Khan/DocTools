@@ -16,13 +16,13 @@ function App() {
       <ToasterProvider />
       <Navbar />
       <Hero />
-      <Features />
+      {/* <Features /> */}
       <HowItWorks />
-      <section id="upload" className="py-10 w-full bg-gradient-to-b from-blue-50 to-purple-100">
+      <section id="upload" className="py-10 w-full bg-gradient-to-b from-blue-50 via-purple-100 to-gray-100">
         <FileUploader />
         <QRSection />
+        <OCR />
       </section>
-      <OCR />
       <Showcase />
       <Footer />
     </>

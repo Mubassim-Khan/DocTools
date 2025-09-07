@@ -11,7 +11,7 @@ import {
   SelectItem,
   SelectTrigger,
 } from "@/components/ui/select";
-import { Download, Loader2 } from "lucide-react";
+import { Download, FileText, Loader2 } from "lucide-react";
 import toast from "react-hot-toast";
 
 export default function FileUploader() {
@@ -78,7 +78,8 @@ export default function FileUploader() {
       </h2>
       <Card className="py-10 w-full max-w-md mx-auto shadow-xl">
         <CardHeader>
-          <CardTitle className="text-lg font-bold">
+          <CardTitle className="flex items-center gap-2 text-lg font-bold">
+            <FileText className="w-5 h-5 text-blue-600" />
             Document Converter
           </CardTitle>
         </CardHeader>

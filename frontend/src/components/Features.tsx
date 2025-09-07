@@ -1,5 +1,5 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { File, Zap, Lock, QrCode } from "lucide-react";
+import { File, Zap, Lock, QrCode, ScanText } from "lucide-react";
 
 const features = [
   {
@@ -22,6 +22,11 @@ const features = [
     desc: "Instantly turn text or links into QR codes and download as PNG.",
     icon: QrCode,
   },
+   {
+    title: "OCR Extraction",
+    desc: "Extract text from scanned PDFs and images with AI-powered OCR.",
+    icon: ScanText,
+  },
 ];
 
 export default function Features() {
@@ -33,14 +38,14 @@ export default function Features() {
       <h2 className="text-3xl font-bold text-center mb-12">
         Everything You Need for Effortless Document Conversion
       </h2>
-      <div className="grid md:grid-cols-4 gap-8">
+      <div className="grid md:grid-cols-5 gap-4 md:gap-6">
         {features.map((item, idx) => (
           <div
             key={idx}
             className="relative rounded-2xl p-[2px] overflow-hidden group"
           >
             {/* Animated border */}
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 animate-border-snake [background-size:300%_300%]" />
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-red-500 to-blue-300 animate-border-snake [background-size:300%_300%]" />
 
             {/* Card content */}
             <Card className="relative z-10 h-full bg-white dark:bg-gray-900 rounded-2xl">

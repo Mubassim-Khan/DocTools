@@ -9,7 +9,11 @@ export default function Hero() {
       <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
         Upload and convert between{" "}
         <span className="font-semibold">PDF, DOCX, TXT, MD, and PPTX</span> in
-        seconds. <br/> Simple. Fast. Reliable.
+        seconds. <br />
+        Plus, unlock extra tools with{" "}
+        <span className="font-semibold">OCR text extraction</span> and{" "}
+        <span className="font-semibold">QR code generation</span>. <br />
+        Simple. Fast. Reliable.
       </p>
       <Button size="lg" asChild>
         <a href="#upload">Start Converting</a>

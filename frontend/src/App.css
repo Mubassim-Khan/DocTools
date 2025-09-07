@@ -13,5 +13,5 @@ html {
 
 .animate-border-snake {
   background-size: 400% 400%;
-  animation: border-snake 20s linear infinite;
+  animation: border-snake 5s linear infinite;
 }
