@@ -24,8 +24,8 @@ def analyze_text_with_gpt41(text: str, user_query: str) -> str:
     Send extracted text to GPT-4.1 (GitHub Models) for reasoning: summary/Q&A.
     """
     response = client.complete(
-        messages=[
-            SystemMessage("You are an assistant that analyzes documents."),
+         messages=[
+            SystemMessage("You are a text summarizer. Your job is to create a brief, clear, and concise summary of the provided document."),
             UserMessage(f"Document:\n{text}\n\nUser request: {user_query}")
         ],
         temperature=0.7,

@@ -40,7 +40,7 @@ export default function Features() {
             className="relative rounded-2xl p-[2px] overflow-hidden group"
           >
             {/* Animated border */}
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 animate-border-snake [background-size:300%_300%]" />
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 animate-border-snake [background-size:300%_300%]" />
 
             {/* Card content */}
             <Card className="relative z-10 h-full bg-white dark:bg-gray-900 rounded-2xl">

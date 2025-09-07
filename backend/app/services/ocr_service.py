@@ -1,12 +1,9 @@
 import os
-from azure.ai.inference import ChatCompletionsClient
-from azure.ai.inference.models import SystemMessage, UserMessage
-from azure.core.credentials import AzureKeyCredential
 from PyPDF2 import PdfReader
-from PIL import Image
 from dotenv import load_dotenv
-
-from app.services.utils import encode_image_to_base64
+from azure.ai.inference import ChatCompletionsClient
+from azure.ai.inference.models import UserMessage, SystemMessage
+from azure.core.credentials import AzureKeyCredential
 
 load_dotenv()
 
@@ -22,53 +19,32 @@ client = ChatCompletionsClient(
     credential=AzureKeyCredential(TOKEN),
 )
 
-def split_image(image_path: str, max_width=1024, max_height=1024):
-    """
-    Split large image into smaller tiles to avoid token limits.
-    """
-    img = Image.open(image_path)
-    width, height = img.size
-
-    chunks = []
-    for top in range(0, height, max_height):
-        for left in range(0, width, max_width):
-            box = (left, top, min(left + max_width, width), min(top + max_height, height))
-            chunk = img.crop(box)
-            chunks.append(chunk)
-    return chunks
-
-def extract_text_from_image(file_path: str) -> str:
-    """
-    Use GPT-4o for OCR on images (jpg/png), split into smaller chunks if necessary.
-    """
-    text_pieces = []
-
-    # Split image into tiles
-    image_chunks = split_image(file_path)
-
-    for idx, chunk in enumerate(image_chunks):
-        # Convert tile to base64
-        base64_img = encode_image_to_base64(chunk)
-
-        response = client.complete(
-            model=MODEL_OCR,
-            messages=[
-                SystemMessage("You are an OCR assistant. Extract all visible text."),
-                UserMessage(f"data:image/jpeg;base64,{base64_img}")
-            ]
-        )
-        chunk_text = response.choices[0].message.content.strip()
-        text_pieces.append(chunk_text)
-    
-    # Combine all extracted text
-    return "\n".join(text_pieces)
-
 def extract_text_from_pdf(file_path: str) -> str:
     """
-    Extract plain text from a PDF using PyPDF2.
+    Extract text from PDF.
+    - Try PyPDF2 first.
+    - If empty → fall back to GPT-4o OCR.
     """
     reader = PdfReader(file_path)
     text = ""
     for page in reader.pages:
         text += page.extract_text() or ""
-    return text.strip()
+
+    text = text.strip()
+
+    # If no text found → scanned PDF → use GPT-4o OCR
+    if not text:
+        with open(file_path, "rb") as f:
+            pdf_bytes = f.read()
+
+        response = client.complete(
+            model=MODEL_OCR,
+            messages=[
+                SystemMessage("You are an OCR assistant. Extract all readable text from this PDF."),
+                UserMessage(content=pdf_bytes, role="user", name="file", mime_type="application/pdf")
+            ],
+        )
+
+        text = response.choices[0].message.content.strip()
+
+    return text
