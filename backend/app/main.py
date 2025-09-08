@@ -8,7 +8,8 @@ app = FastAPI(title="DocTools API")
 origins = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
-    "https://m-doctools.vercel.app"
+    "https://m-doctools.vercel.app",
+    "https://doc-tools-fa5u.vercel.app"
 ]
 
 app.add_middleware(
@@ -16,7 +17,8 @@ app.add_middleware(
     allow_origins=origins,         
     allow_credentials=True,
     allow_methods=["*"],           
-    allow_headers=["*"],           
+    allow_headers=["*"],          
+    expose_headers=["*"] 
 )
 
 # register routes
