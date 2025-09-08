@@ -11,7 +11,7 @@ const navLinks = [
 
 export default function Navbar() {
   return (
-    <header className="border-b bg-white/70 backdrop-blur-md sticky top-0 z-50">
+    <header className="border-b bg-white/70 backdrop-blur-md fixed top-0 left-0 w-full z-50">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <a href="/" className="flex items-center gap-2">
           <img
