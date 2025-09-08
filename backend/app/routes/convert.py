@@ -9,22 +9,21 @@ router = APIRouter(prefix="/convert", tags=["Conversion"])
 @router.post("")
 async def convert_file(file: UploadFile, output_format: str = Form(...)):
     try:
-        # Save uploaded file
-        input_path = f"temp/src/temp_{uuid.uuid4()}_{file.filename}"
+        temp_dir = "/tmp"
+        os.makedirs(temp_dir, exist_ok=True)
+
+        input_path = os.path.join(temp_dir, f"src_{uuid.uuid4()}_{file.filename}")
         with open(input_path, "wb") as f:
             f.write(await file.read())
 
-        # Derive correct extension for output file
-        # Example: "pdf-to-docx" -> "docx"
         output_ext = output_format.split("-")[-1]
-        output_path = f"temp/output/converted_{uuid.uuid4()}.{output_ext}"
+        output_path = os.path.join(temp_dir, f"converted_{uuid.uuid4()}.{output_ext}")
 
-        # Call your auto converter (new signature)
         convert_file_auto(input_path, output_path, output_format)
 
         return FileResponse(output_path, filename=f"converted.{output_ext}")
     
     except Exception as e:
         import traceback
-        print(traceback.format_exc())  # show in logs
-        return ({"error": str(e)}), 500
+        print(traceback.format_exc())
+        return {"error": str(e)}, 500

@@ -6,10 +6,12 @@ import os
 router = APIRouter(prefix="/analyze", tags=["Analyze"])
 
 @router.post("")
-
 async def analyze_doc(file: UploadFile, query: str = Form("Summarize this document.")):
     try:
-        file_path = os.path.join("temp", file.filename)
+        temp_dir = "/tmp"
+        os.makedirs(temp_dir, exist_ok=True)
+
+        file_path = os.path.join(temp_dir, file.filename)
         with open(file_path, "wb") as f:
             f.write(await file.read())
 
@@ -23,5 +25,5 @@ async def analyze_doc(file: UploadFile, query: str = Form("Summarize this docume
     
     except Exception as e:
         import traceback
-        print(traceback.format_exc())  # show in logs
-        return ({"error": str(e)}), 500
+        print(traceback.format_exc())  # logs in Vercel
+        return {"error": str(e)}, 500
