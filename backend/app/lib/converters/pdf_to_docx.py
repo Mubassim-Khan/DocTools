@@ -1,7 +1,14 @@
-from pdf2docx import Converter
+from PyPDF2 import PdfReader
+from docx import Document
 
 def pdf_to_docx(input_path: str, output_path: str) -> str:
-    cv = Converter(input_path)
-    cv.convert(output_path, start=0, end=None)  # convert all pages
-    cv.close()
+    reader = PdfReader(input_path)
+    doc = Document()
+
+    for page in reader.pages:
+        text = page.extract_text()
+        if text:
+            doc.add_paragraph(text)
+
+    doc.save(output_path)
     return output_path
