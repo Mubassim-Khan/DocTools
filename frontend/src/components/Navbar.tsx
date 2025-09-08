@@ -15,7 +15,7 @@ export default function Navbar() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <a href="/" className="flex items-center gap-2">
           <img
-            src="../src/assets/Logo.png"
+            src="./Logo.png"
             alt="DocTools Logo"
             className="h-[130px] w-[150px] object-contain p-2"
           />

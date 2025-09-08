@@ -11,10 +11,10 @@ import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 
 const images = [
-  "../src/assets/conversion1.jpg",
-  "../src/assets/conversion2.png",
-  "../src/assets/conversion3.jpg",
-  "../src/assets/conversion4.jpg",
+  "./conversion1.jpg",
+  "./conversion2.png",
+  "./conversion3.jpg",
+  "./conversion4.jpg",
 ];
 
 export default function Showcase() {
