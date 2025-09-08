@@ -30,6 +30,16 @@ export default function FileUploader() {
     "txt-to-docx": ["txt"], // TXT → DOCX
   };
 
+  // Mapping conversion keys to actual output extensions
+  const outputExtMap: Record<string, string> = {
+    "pdf-to-docx": "docx",
+    "docx-to-pdf": "pdf",
+    "pdf-to-pptx": "pptx",
+    "md-to-pdf": "pdf",
+    "docx-to-txt": "txt",
+    "txt-to-docx": "docx",
+  };
+
   const handleUpload = async () => {
     if (!file) return;
 
@@ -40,7 +50,7 @@ export default function FileUploader() {
       toast.error(
         `Invalid file. Expected: ${requiredExts
           .map((ext) => `.${ext}`)
-          .join(", ")}`
+          .join(", ")} file`
       );
       return;
     }
@@ -63,7 +73,9 @@ export default function FileUploader() {
       const url = window.URL.createObjectURL(new Blob([res.data]));
       setDownloadUrl(url);
 
-      toast.success(`File converted successfully to ${format.toUpperCase()}`);
+      toast.success(
+        `File converted successfully to ${outputExtMap[format].toUpperCase()}`
+      );
     } catch (err) {
       console.error(err);
       toast.error("Conversion failed. Please try again.");
@@ -122,7 +134,10 @@ export default function FileUploader() {
               className="w-full flex items-center justify-center gap-2"
               variant="outline"
             >
-              <a href={downloadUrl} download={`converted.${format}`}>
+              <a
+                href={downloadUrl}
+                download={`converted.${outputExtMap[format]}`}
+              >
                 <Download className="w-4 h-4" />
                 Download File
               </a>

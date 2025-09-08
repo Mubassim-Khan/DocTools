@@ -1,11 +1,10 @@
 fastapi
 uvicorn
-pypandoc
-pdf2docx 
-reportlab 
-docx2pdf 
 markdown
-weasyprint
-azure-ai-inference
+fpdf2
+python-docx
+python-pptx
 PyPDF2
-load_dotenv
+python-dotenv
+azure-ai-inference
+bs4

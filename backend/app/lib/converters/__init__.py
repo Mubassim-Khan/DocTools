@@ -4,7 +4,6 @@ from .pdf_to_pptx import pdf_to_pptx
 from .md_to_pdf import md_to_pdf
 from .txt_to_docx import txt_to_docx
 from .docx_to_txt import docx_to_txt
-from .generic_converter import convert
 
 def convert_file_auto(input_path: str, output_path: str, output_format: str):
     format_map = {
@@ -20,11 +19,7 @@ def convert_file_auto(input_path: str, output_path: str, output_format: str):
         raise ValueError(f"Unsupported conversion format: {output_format}")
 
     input_ext, output_ext = format_map[output_format]
-
-    input_ext = input_ext.lower()
-    output_ext = output_ext.lower()
-
-    print(f"IMPORTANT!! Input ext: {input_ext}; Output ext: {output_ext}")
+    input_ext, output_ext = input_ext.lower(), output_ext.lower()
 
     if input_ext == "pdf" and output_ext == "docx":
         return pdf_to_docx(input_path, output_path)
@@ -39,4 +34,4 @@ def convert_file_auto(input_path: str, output_path: str, output_format: str):
     elif input_ext == "docx" and output_ext == "txt":
         return docx_to_txt(input_path, output_path)
     else:
-        return convert(input_path, output_path, output_ext)
+        raise ValueError("Unsupported conversion operation")
