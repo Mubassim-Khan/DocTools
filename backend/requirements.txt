@@ -8,3 +8,4 @@ PyPDF2
 python-dotenv
 azure-ai-inference
 bs4
+python-multipart
